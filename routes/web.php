@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\ServiciosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', [InicioController::class, 'index'])->name('inicio');
+
+Route::get('/servicios', [ServiciosController::class, 'index'])->name('servicios');
+
+Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto');
