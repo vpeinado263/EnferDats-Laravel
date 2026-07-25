@@ -35,13 +35,13 @@
                     </thead>
                     <tbody>
                         @foreach ($tecnicasDemo as $item)
-                        <tr data-id="{{ $item['id'] }}">
-                            <td class="id-col">{{ $item['id'] }}</td>
+                        <tr data-id="{{ $item->id }}">
+                            <td class="id-col">{{ $item->id }}</td>
                             <td>
-                                <input type="text" class="form-control-plaintext nombre-input" value="{{ $item['nombre'] }}" placeholder="Nombre">
+                                <input type="text" class="form-control-plaintext nombre-input" value="{{ $item->nombre }}" placeholder="Nombre">
                             </td>
                             <td>
-                                <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item['precio'], 2, '.', '') }}" placeholder="0.00">
+                                <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item->costo, 2, '.', '') }}" placeholder="0.00">
                             </td>
                             <td class="accion-col">
                                 <button class="btn-accion eliminar-fila" title="Eliminar fila">✕</button>
@@ -78,13 +78,13 @@
                     </thead>
                     <tbody>
                         @foreach ($insumosDemo as $item)
-                        <tr data-id="{{ $item['id'] }}">
-                            <td class="id-col">{{ $item['id'] }}</td>
+                        <tr data-id="{{ $item->id }}">
+                            <td class="id-col">{{ $item->id }}</td>
                             <td>
-                                <input type="text" class="form-control-plaintext nombre-input" value="{{ $item['nombre'] }}" placeholder="Nombre">
+                                <input type="text" class="form-control-plaintext nombre-input" value="{{ $item->nombre }}" placeholder="Nombre">
                             </td>
                             <td>
-                                <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item['precio'], 2, '.', '') }}" placeholder="0.00">
+                                <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item->costo, 2, '.', '') }}" placeholder="0.00">
                             </td>
                             <td class="accion-col">
                                 <button class="btn-accion eliminar-fila" title="Eliminar fila">✕</button>
