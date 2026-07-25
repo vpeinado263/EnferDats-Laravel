@@ -13,3 +13,5 @@ El proyecto fue desarrollado utilizando:
 - Git
 - GitHub
 - Visual Studio Code
+
+php artisan serve
