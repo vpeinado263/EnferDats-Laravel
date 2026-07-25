@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Procedimiento extends Model
 {
     use HasFactory;
+    protected $fillable = ['nombre', 'costo'];
 }
-protected $fillable = ['nombre', 'costo'];
