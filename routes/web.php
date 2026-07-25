@@ -30,3 +30,9 @@ Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto')
 Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->name('dashboard');
+
+
+Route::get('/procedimientos/create', [ProcedimientoController::class, 'create'])->name('procedimientos.create');
+Route::post('/procedimientos', [ProcedimientoController::class, 'store'])->name('procedimientos.store');
+Route::put('/procedimientos/{id}', [ProcedimientoController::class, 'update'])->name('procedimientos.update');
+Route::delete('/procedimientos/{id}', [ProcedimientoController::class, 'destroy'])->name('procedimientos.destroy');
