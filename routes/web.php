@@ -5,21 +5,8 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\ProcedimientoController;
 use App\Http\Controllers\InsumoController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
@@ -27,21 +14,14 @@ Route::get('/servicios', [ServiciosController::class, 'index'])->name('servicios
 
 Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto');
 
+// Dashboard usando el controlador
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard'); 
-})->name('dashboard');
-
-
-Route::get('/procedimientos/create', [ProcedimientoController::class, 'create'])->name('procedimientos.create');
-Route::post('/procedimientos', [ProcedimientoController::class, 'store'])->name('procedimientos.store');
-Route::put('/procedimientos/{id}', [ProcedimientoController::class, 'update'])->name('procedimientos.update');
-Route::delete('/procedimientos/{id}', [ProcedimientoController::class, 'destroy'])->name('procedimientos.destroy');
-
-Route::post('/solicitudes', [SolicitudController::class, 'store'])->name('solicitudes.store');
-
-// Rutas CRUD para procedimientos
+// CRUD para procedimientos (todas las rutas excepto 'show')
 Route::resource('procedimientos', ProcedimientoController::class)->except(['show']);
 
-// Rutas CRUD para insumos
+// CRUD para insumos (crea el controlador InsumoController con métodos similares)
 Route::resource('insumos', InsumoController::class)->except(['show']);
+
+// Ruta para guardar solicitudes
+Route::post('/solicitudes', [SolicitudController::class, 'store'])->name('solicitudes.store');
