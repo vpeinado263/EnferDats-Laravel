@@ -36,3 +36,5 @@ Route::get('/procedimientos/create', [ProcedimientoController::class, 'create'])
 Route::post('/procedimientos', [ProcedimientoController::class, 'store'])->name('procedimientos.store');
 Route::put('/procedimientos/{id}', [ProcedimientoController::class, 'update'])->name('procedimientos.update');
 Route::delete('/procedimientos/{id}', [ProcedimientoController::class, 'destroy'])->name('procedimientos.destroy');
+
+Route::post('/solicitudes', [SolicitudController::class, 'store'])->name('solicitudes.store');
