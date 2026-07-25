@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insumo;
 use Illuminate\Http\Request;
 
 class InsumoController extends Controller
@@ -25,11 +26,11 @@ class InsumoController extends Controller
     public function update(Request $request, $id)
     
     {
-        $procedimiento = Insumo::findOrFail($id);
+        $insumo = Insumo::findOrFail($id);
         $request->validate([
         'nombre' => 'required|string|max:255',
         'precio' => 'required|numeric|min:0',]);
-        $procedimiento->update($request->all());
+        $insumo->update($request->all());
         
         return redirect()->route('dashboard')->with('success', 'Insumo actualizado.');
     }
