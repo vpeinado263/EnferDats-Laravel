@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\ServiciosController;
-
+use App\Http\Controllers\ProcedimientoController;
+use App\Http\Controllers\InsumoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,9 @@ Route::put('/procedimientos/{id}', [ProcedimientoController::class, 'update'])->
 Route::delete('/procedimientos/{id}', [ProcedimientoController::class, 'destroy'])->name('procedimientos.destroy');
 
 Route::post('/solicitudes', [SolicitudController::class, 'store'])->name('solicitudes.store');
+
+// Rutas CRUD para procedimientos
+Route::resource('procedimientos', ProcedimientoController::class)->except(['show']);
+
+// Rutas CRUD para insumos
+Route::resource('insumos', InsumoController::class)->except(['show']);
