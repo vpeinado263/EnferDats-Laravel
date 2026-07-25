@@ -9,3 +9,4 @@ class Procedimiento extends Model
 {
     use HasFactory;
 }
+protected $fillable = ['nombre', 'costo'];

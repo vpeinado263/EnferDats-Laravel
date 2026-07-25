@@ -9,3 +9,4 @@ class Insumo extends Model
 {
     use HasFactory;
 }
+protected $fillable = ['nombre', 'precio'];
