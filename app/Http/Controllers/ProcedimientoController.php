@@ -6,7 +6,12 @@ use App\Models\Procedimiento;
 use Illuminate\Http\Request;
 
 class ProcedimientoController extends Controller
+
 {
+    public function index()
+    {
+        return redirect()->route('dashboard');
+    }
     
     public function store(Request $request)
     {
