@@ -21,7 +21,21 @@ class SolicitudController extends Controller
         'necesidades' => 'nullable|string',
     ]);
 
-    Solicitud::create($request->all());
+    // Debe Convertir los array de objetivos a string separado por comas
+    $objetivos = $request->has('objetivos') ? implode(', ', $request->objetivos) : null;
+
+    Solicitud::create([
+        'institucion' => $request->institucion,
+        'tipo_institucion' => $request->tipo_institucion,
+        'provincia' => $request->provincia,
+        'responsable' => $request->responsable,
+        'cargo' => $request->cargo,
+        'email' => $request->email,
+        'telefono' => $request->telefono,
+        'objetivos' => $objetivos,
+        'necesidades' => $request->necesidades,
+    ]);
+
     return redirect()->route('contacto')->with('success', 'Solicitud enviada correctamente.');
 }
 }
