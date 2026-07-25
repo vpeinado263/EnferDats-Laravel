@@ -3,6 +3,7 @@
 @section('title', 'Contacto - ENFER-DATS')
 
 @section('content')
+
 <section id="solicitud" class="py-5">
     <div class="container bg-light-subtle">
         <div class="text-center mb-5">
@@ -15,7 +16,8 @@
                 <div class="card shadow-sm border-0">   
                     <div class="card-body p-4 p-md-5">
                          <!-- Formulario de contacto / Solicitud -->
-                        <form class="formulario-enferdata-form">
+                        <form action="{{ route('solicitudes.store') }}" method="POST"  class="formulario-enferdata-form">
+                            @csrf
                             <h4 class="mb-4">Información Institucional</h4>
                             <div class="mb-3">
                                 <label class="form-label">Nombre de la Institución o Servicio</label>
@@ -104,4 +106,5 @@
         </div>  
     </div>
 </section>
+
 @endsection
