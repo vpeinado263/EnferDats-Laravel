@@ -19,8 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
 Route::get('/servicios', [ServiciosController::class, 'index'])->name('servicios');
 
 Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard'); 
+})->name('dashboard');
