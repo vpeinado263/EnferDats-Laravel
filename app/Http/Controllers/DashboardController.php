@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Datos de ejemplo (los mismos que estaban en el PHP)
+        // Voy a dejar datos de ejemploc como en mi archivo PHP anterior
         $tecnicasDemo = [
             ['id' => 1, 'nombre' => 'Toma de signos vitales', 'precio' => 5.50],
             ['id' => 2, 'nombre' => 'Administración de medicamentos', 'precio' => 8.00],
