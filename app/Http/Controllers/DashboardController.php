@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $tecnicasDemo = Procedimiento::all(); // antes era un array
+        $tecnicasDemo = Procedimiento::all();
         $insumosDemo = Insumo::all();
         return view('dashboard', compact('tecnicasDemo', 'insumosDemo'));
     }
