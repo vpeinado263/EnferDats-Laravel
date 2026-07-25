@@ -20,6 +20,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#areas">Área de Gestión</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('servicios') }}">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                </li>
             </ul>
             <a href="{{ url('/dashboard') }}" class="btn btn-info ms-lg-3">Probar Demo</a>
             <a href="#solicitud"
