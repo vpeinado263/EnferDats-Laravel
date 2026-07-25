@@ -6,59 +6,38 @@ use Illuminate\Http\Request;
 
 class InsumoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return redirect()->route('dashboard');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+    
+        Insumo::create($request->all());
+        return redirect()->route('dashboard')->with('success', 'Insumo creado.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
+    
     {
-        //
+        $procedimiento = Insumo::findOrFail($id);
+        $request->validate([
+        'nombre' => 'required|string|max:255',
+        'precio' => 'required|numeric|min:0',]);
+        $procedimiento->update($request->all());
+        
+        return redirect()->route('dashboard')->with('success', 'Insumo actualizado.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Insumo::findOrFail($id)->delete();
+        return redirect()->route('dashboard')->with('success', 'Insumo eliminado.');
     }
 }
