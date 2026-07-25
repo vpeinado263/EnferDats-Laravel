@@ -20,7 +20,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // CRUD para procedimientos (todas las rutas excepto 'show')
 Route::resource('procedimientos', ProcedimientoController::class)->except(['show']);
 
-// CRUD para insumos (crea el controlador InsumoController con métodos similares)
+// CRUD para insumos 
 Route::resource('insumos', InsumoController::class)->except(['show']);
 
 // Ruta para guardar solicitudes
