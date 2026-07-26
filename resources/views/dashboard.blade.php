@@ -2,10 +2,6 @@
 
 @section('title', 'Dashboard - ENFER-DATS')
 
-@push('styles')
-
-@endpush
-
 @section('content')
 
 @if(session('success'))
@@ -22,7 +18,7 @@
         <span class="text-secondary">(Datos de ejemplo – sin conexión a base de datos)</span>
     </p>
 
-    <!-- Tabla de técnicas -->
+    <!-- Tabla de técnicas/procedimientos-->
     <div class="card">
         <div class="card-header">
             <span style="font-weight:600;">Catálogo de Técnicas Asistenciales</span>
@@ -30,6 +26,24 @@
                 Costo operativo por procedimiento registrado
             </span>
         </div>
+
+        <div class="card-body pt-2 pb-0">
+            <form action="{{ route('procedimientos.store') }}" method="POST" class="row g-2 align-items-end">
+                @csrf
+                <div class="col-md-6">
+                    <label class="form-label small">Nuevo procedimiento</label>
+                    <input type="text" name="nombre" class="form-control form-control-sm" placeholder="Nombre" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small">Costo</label>
+                    <input type="number" step="0.01" name="costo" class="form-control form-control-sm" placeholder="0.00" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-sm btn-primary w-100">Agregar</button>
+                </div>
+            </form>
+        </div>
+
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table" id="tablaTecnicas">
@@ -73,6 +87,24 @@
                 Costo unitario y valorización de stock
             </span>
         </div>
+
+        <div class="card-body pt-2 pb-0">
+            <form action="{{ route('insumos.store') }}" method="POST" class="row g-2 align-items-end">
+                @csrf
+                <div class="col-md-6">
+                    <label class="form-label small">Nuevo insumo</label>
+                    <input type="text" name="nombre" class="form-control form-control-sm" placeholder="Nombre" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small">Precio</label>
+                    <input type="number" step="0.01" name="precio" class="form-control form-control-sm" placeholder="0.00" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-sm btn-primary w-100">Agregar</button>
+                </div>
+            </form>
+        </div>
+
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table" id="tablaInsumos">
@@ -108,6 +140,7 @@
         </div>
     </div>
 
+
     <div class="row mt-3">
         <div class="col-6">
             <button class="btn-guardar" id="btnGuardarCambios">💾 Consolidar Actualización</button>
@@ -116,11 +149,6 @@
         <div class="col-6 text-end">
             <a href="{{ route('inicio') }}" class="btn-volver">← Volver a la página principal</a>
         </div>
-    </div>
-
-    <div class="footer-demo">
-        © 2026 ENFER-DATS · Plataforma de Gestión, Trazabilidad y Analítica de Enfermería // VHPTech
-        <span class="text-secondary">Sin conexión a BD – solo simulación local</span>
     </div>
 </div>
 
