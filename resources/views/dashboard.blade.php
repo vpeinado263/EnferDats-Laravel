@@ -7,6 +7,14 @@
 @endpush
 
 @section('content')
+
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="container">
     <h1 class="page-title">Dashboard de Costos Operativos · ENFER-DATS</h1>
     <p class="text-muted" style="font-weight:300; margin-top:-0.5rem; margin-bottom:2rem;">
@@ -115,6 +123,7 @@
         <span class="text-secondary">Sin conexión a BD – solo simulación local</span>
     </div>
 </div>
+
 @endsection
 
 @push('scripts')
