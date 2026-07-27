@@ -6,7 +6,6 @@ use App\Models\Procedimiento;
 use Illuminate\Http\Request;
 
 class ProcedimientoController extends Controller
-
 {
     public function index()
     {
@@ -25,7 +24,6 @@ class ProcedimientoController extends Controller
     }
 
     public function update(Request $request, $id)
-    
     {
         $procedimiento = Procedimiento::findOrFail($id);
         $request->validate([
@@ -36,7 +34,6 @@ class ProcedimientoController extends Controller
         return redirect()->route('dashboard')->with('success', 'Procedimiento actualizado.');
     }
 
-    
     public function destroy($id)
     {
         Procedimiento::findOrFail($id)->delete();

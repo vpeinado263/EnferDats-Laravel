@@ -679,8 +679,167 @@
       margin-bottom: 0;
       letter-spacing: 0.01em;
     }
-    
-    /* =========================RESPONSIVE========================== */
+
+/* =========================DASHBOARD========================== */
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #212529;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-weight: 300;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Tarjetas estilo minimalista */
+.card {
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  box-shadow: none;
+  background: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  background: #e9ecef;
+  border-bottom: 1px solid #ced4da;
+  font-weight: 600;
+  color: #212529;
+  padding: 0.75rem 1.25rem;
+}
+
+.card-body.p-0 {
+  padding: 0.5rem 0 0 0;
+}
+
+.card-footer {
+  background: #ffffff;
+  border-top: 1px solid #dee2e6;
+  padding: 0.5rem 1rem;
+}
+
+/* Tablas */
+.table-dashboard {
+  margin-bottom: 0;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.table-dashboard th {
+  background: #f1f3f5;
+  color: #212529;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.table-dashboard td {
+  padding: 0.2rem 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+.table-dashboard input[type="text"],
+.table-dashboard input[type="number"] {
+  width: 100%;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  background: #ffffff;
+  font-size: 0.95rem;
+  color: #212529;
+  transition: border-color 0.1s ease;
+}
+
+.table-dashboard input:focus {
+  border-color: #495057;
+  outline: none;
+  background: #fff;
+}
+
+/* Columnas específicas */
+.id-col {
+  width: 60px;
+  text-align: center;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.accion-col {
+  width: 100px;
+  text-align: center;
+}
+
+/* Botones de acción */
+.btn-accion {
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  color: #212529;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 0;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.btn-accion:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.btn-guardar {
+  border: 1px solid #6c757d;
+  background: #ffffff;
+  color: #212529;
+  padding: 0.4rem 1.2rem;
+  border-radius: 0;
+  font-weight: 500;
+}
+
+.btn-guardar:hover {
+  background: #e9ecef;
+}
+
+.btn-volver {
+  border: 1px solid #adb5bd;
+  background: #ffffff;
+  color: #212529;
+  padding: 0.4rem 1.2rem;
+  border-radius: 0;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-volver:hover {
+  background: #e9ecef;
+  text-decoration: none;
+  color: #212529;
+}
+
+/* Ocultar flechas de input number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Mensaje de actualización */
+#mensajeActualizacion {
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: opacity 0.3s;
+}  
+
+
+/* =========================RESPONSIVE========================== */
       @media (max-width: 768px) {
         #inicio {
           padding: 3rem 0;

@@ -11,22 +11,30 @@
     </div>
 @endif
 
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="container">
     <h1 class="page-title">Dashboard de Costos Operativos · ENFER-DATS</h1>
-    <p class="text-muted" style="font-weight:300; margin-top:-0.5rem; margin-bottom:2rem;">
+    <p class="text-muted subtitle">
         Gestión analítica de costos, control de insumos y monitoreo de actividades asistenciales.
-        <span class="text-secondary">(Datos de ejemplo – sin conexión a base de datos)</span>
+        <span class="text-secondary">(Datos almacenados en base de datos)</span>
     </p>
 
-    <!-- Tabla de técnicas/procedimientos-->
+    <!-- ========== TABLA DE PROCEDIMIENTOS ========== -->
     <div class="card">
         <div class="card-header">
-            <span style="font-weight:600;">Catálogo de Técnicas Asistenciales</span>
-            <span class="float-end text-secondary" style="font-weight:300; font-size:0.9rem;">
+            <span class="fw-bold">Catálogo de Técnicas Asistenciales</span>
+            <span class="float-end text-secondary small">
                 Costo operativo por procedimiento registrado
             </span>
         </div>
 
+        <!-- Formulario para agregar nuevo procedimiento -->
         <div class="card-body pt-2 pb-0">
             <form action="{{ route('procedimientos.store') }}" method="POST" class="row g-2 align-items-end">
                 @csrf
@@ -35,7 +43,7 @@
                     <input type="text" name="nombre" class="form-control form-control-sm" placeholder="Nombre" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label small">Costo</label>
+                    <label class="form-label small">Costo ($)</label>
                     <input type="number" step="0.01" name="costo" class="form-control form-control-sm" placeholder="0.00" required>
                 </div>
                 <div class="col-md-2">
@@ -44,9 +52,10 @@
             </form>
         </div>
 
+        <!-- Tabla de procedimientos -->
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table" id="tablaTecnicas">
+                <table class="table table-dashboard" id="tablaProcedimientos">
                     <thead>
                         <tr>
                             <th class="id-col">ID</th>
@@ -66,7 +75,12 @@
                                 <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item->costo, 2, '.', '') }}" placeholder="0.00">
                             </td>
                             <td class="accion-col">
-                                <button class="btn-accion eliminar-fila" title="Eliminar fila">✕</button>
+                                <button class="btn-accion actualizar-fila" data-id="{{ $item->id }}" data-tabla="procedimientos" title="Actualizar">💾</button>
+                                <form action="{{ route('procedimientos.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-accion" onclick="return confirm('¿Eliminar este procedimiento?')" title="Eliminar">✕</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -74,20 +88,22 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer bg-white border-top-0" style="padding:0.5rem 1rem; border-top:1px solid #dee2e6;">
+        <div class="card-footer bg-white border-top-0 py-2">
             <button class="btn-accion" id="btnAgregarTecnica" style="padding:0.2rem 0.8rem;">+ Registrar procedimiento</button>
+            <span class="text-muted small ms-2">(alternativa al formulario superior)</span>
         </div>
     </div>
 
-    <!-- Tabla de insumos -->
-    <div class="card">
+    <!-- ========== TABLA DE INSUMOS ========== -->
+    <div class="card mt-4">
         <div class="card-header">
-            <span style="font-weight:600;">Catálogo de Insumos Hospitalarios</span>
-            <span class="float-end text-secondary" style="font-weight:300; font-size:0.9rem;">
+            <span class="fw-bold">Catálogo de Insumos Hospitalarios</span>
+            <span class="float-end text-secondary small">
                 Costo unitario y valorización de stock
             </span>
         </div>
 
+        <!-- Formulario para agregar nuevo insumo -->
         <div class="card-body pt-2 pb-0">
             <form action="{{ route('insumos.store') }}" method="POST" class="row g-2 align-items-end">
                 @csrf
@@ -96,7 +112,7 @@
                     <input type="text" name="nombre" class="form-control form-control-sm" placeholder="Nombre" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label small">Precio</label>
+                    <label class="form-label small">Precio ($)</label>
                     <input type="number" step="0.01" name="precio" class="form-control form-control-sm" placeholder="0.00" required>
                 </div>
                 <div class="col-md-2">
@@ -105,9 +121,10 @@
             </form>
         </div>
 
+        <!-- Tabla de insumos -->
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table" id="tablaInsumos">
+                <table class="table table-dashboard" id="tablaInsumos">
                     <thead>
                         <tr>
                             <th class="id-col">ID</th>
@@ -127,7 +144,12 @@
                                 <input type="number" step="0.01" min="0" class="form-control-plaintext precio-input" value="{{ number_format($item->precio, 2, '.', '') }}" placeholder="0.00">
                             </td>
                             <td class="accion-col">
-                                <button class="btn-accion eliminar-fila" title="Eliminar fila">✕</button>
+                                <button class="btn-accion actualizar-fila" data-id="{{ $item->id }}" data-tabla="insumos" title="Actualizar">💾</button>
+                                <form action="{{ route('insumos.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-accion" onclick="return confirm('¿Eliminar este insumo?')" title="Eliminar">✕</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -135,23 +157,22 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer bg-white border-top-0" style="padding:0.5rem 1rem; border-top:1px solid #dee2e6;">
+        <div class="card-footer bg-white border-top-0 py-2">
             <button class="btn-accion" id="btnAgregarInsumo" style="padding:0.2rem 0.8rem;">+ Registrar recurso</button>
+            <span class="text-muted small ms-2">(alternativa al formulario superior)</span>
         </div>
     </div>
 
-
+    <!-- Botones de navegación -->
     <div class="row mt-3">
         <div class="col-6">
-            <button class="btn-guardar" id="btnGuardarCambios">💾 Consolidar Actualización</button>
-            <span id="mensajeGuardado" class="text-muted ms-3" style="font-size:0.9rem;"></span>
+            <span id="mensajeActualizacion" class="text-muted small"></span>
         </div>
         <div class="col-6 text-end">
             <a href="{{ route('inicio') }}" class="btn-volver">← Volver a la página principal</a>
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('scripts')
@@ -159,119 +180,80 @@
     (function() {
         'use strict';
 
-        function obtenerDatosTabla(tableId) {
-            const tbody = document.querySelector('#' + tableId + ' tbody');
-            const filas = tbody.querySelectorAll('tr');
-            const datos = [];
-            filas.forEach(function(tr) {
-                const id = tr.dataset.id ? parseInt(tr.dataset.id) : null;
-                const nombreInput = tr.querySelector('.nombre-input');
-                const precioInput = tr.querySelector('.precio-input');
-                if (nombreInput && precioInput) {
-                    const nombre = nombreInput.value.trim();
-                    const precio = parseFloat(precioInput.value) || 0;
-                    datos.push({
-                        id: id,
-                        nombre: nombre,
-                        precio: precio
-                    });
+        // Función para mostrar mensaje temporal
+        function mostrarMensaje(texto, tipo = 'success') {
+            const el = document.getElementById('mensajeActualizacion');
+            el.textContent = texto;
+            el.style.color = tipo === 'success' ? '#198754' : '#dc3545';
+            setTimeout(() => { el.textContent = ''; }, 4000);
+        }
+
+        // Manejar clic en botón actualizar (💾)
+        document.querySelectorAll('.actualizar-fila').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.dataset.id;
+                const tabla = this.dataset.tabla; // 'procedimientos' o 'insumos'
+                const row = this.closest('tr');
+                const nombre = row.querySelector('.nombre-input').value.trim();
+                const precio = row.querySelector('.precio-input').value.trim();
+
+                if (!nombre || isNaN(parseFloat(precio))) {
+                    mostrarMensaje('Completa todos los campos correctamente.', 'error');
+                    return;
                 }
-            });
-            return datos;
-        }
 
-        function mostrarMensaje(texto, esExito = true) {
-            const msg = document.getElementById('mensajeGuardado');
-            msg.textContent = texto;
-            msg.style.color = esExito ? '#198754' : '#dc3545';
-            setTimeout(() => {
-                msg.textContent = '';
-            }, 4000);
-        }
+                // Determinar la ruta según la tabla
+                const url = `/${tabla}/${id}`;
+                const data = {
+                    nombre: nombre,
+                    precio: tabla === 'insumos' ? parseFloat(precio) : parseFloat(precio), // en insumos se llama 'precio'
+                    // Nota: en procedimientos la columna es 'costo', pero en el controlador aceptamos 'costo' o 'precio'
+                    // Para simplificar, el controlador debe leer 'precio' para insumos y 'costo' para procedimientos.
+                    // Vamos a enviar un campo genérico 'valor' y en el controlador lo asignamos.
+                    // O mejor, usar el nombre correcto según la tabla.
+                };
 
-        document.getElementById('btnGuardarCambios').addEventListener('click', function() {
-            const tecnicas = obtenerDatosTabla('tablaTecnicas');
-            const insumos = obtenerDatosTabla('tablaInsumos');
-            console.log('📋 Técnicas:', tecnicas);
-            console.log('📦 Insumos:', insumos);
-            mostrarMensaje('✅ Cambios simulados guardados localmente (consola)', true);
-        });
+                // Para insumos, el campo es 'precio'; para procedimientos, 'costo'
+                if (tabla === 'insumos') {
+                    data.precio = parseFloat(precio);
+                } else {
+                    data.costo = parseFloat(precio);
+                }
 
-        function agregarFila(tableId, nombrePlaceholder = 'Nuevo', precioPlaceholder = '0.00') {
-            const tbody = document.querySelector('#' + tableId + ' tbody');
-            const filas = tbody.querySelectorAll('tr');
-            let maxId = 0;
-            filas.forEach(tr => {
-                const id = parseInt(tr.dataset.id);
-                if (!isNaN(id) && id > maxId) maxId = id;
-            });
-            const nuevoId = maxId + 1;
-
-            const tr = document.createElement('tr');
-            tr.dataset.id = nuevoId;
-
-            const tdId = document.createElement('td');
-            tdId.className = 'id-col';
-            tdId.textContent = nuevoId;
-            tr.appendChild(tdId);
-
-            const tdNombre = document.createElement('td');
-            const inputNombre = document.createElement('input');
-            inputNombre.type = 'text';
-            inputNombre.className = 'form-control-plaintext nombre-input';
-            inputNombre.placeholder = nombrePlaceholder;
-            tdNombre.appendChild(inputNombre);
-            tr.appendChild(tdNombre);
-
-            const tdPrecio = document.createElement('td');
-            const inputPrecio = document.createElement('input');
-            inputPrecio.type = 'number';
-            inputPrecio.step = '0.01';
-            inputPrecio.min = '0';
-            inputPrecio.className = 'form-control-plaintext precio-input';
-            inputPrecio.placeholder = precioPlaceholder;
-            tdPrecio.appendChild(inputPrecio);
-            tr.appendChild(tdPrecio);
-
-            const tdAccion = document.createElement('td');
-            tdAccion.className = 'accion-col';
-            const btnEliminar = document.createElement('button');
-            btnEliminar.className = 'btn-accion eliminar-fila';
-            btnEliminar.title = 'Eliminar fila';
-            btnEliminar.textContent = '✕';
-            tdAccion.appendChild(btnEliminar);
-            tr.appendChild(tdAccion);
-
-            tbody.appendChild(tr);
-            inputNombre.focus();
-        }
-
-        document.getElementById('btnAgregarTecnica').addEventListener('click', function() {
-            agregarFila('tablaTecnicas', 'Nueva técnica', '0.00');
-        });
-
-        document.getElementById('btnAgregarInsumo').addEventListener('click', function() {
-            agregarFila('tablaInsumos', 'Nuevo insumo', '0.00');
-        });
-
-        document.addEventListener('click', function(e) {
-            const btn = e.target.closest('.eliminar-fila');
-            if (!btn) return;
-            const tr = btn.closest('tr');
-            if (!tr) return;
-            if (confirm('¿Eliminar esta fila?')) {
-                tr.remove();
-                const tbody = tr.parentNode;
-                const filas = tbody.querySelectorAll('tr');
-                filas.forEach((fila, index) => {
-                    const idCelda = fila.querySelector('.id-col');
-                    if (idCelda) {
-                        idCelda.textContent = index + 1;
-                        fila.dataset.id = index + 1;
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        mostrarMensaje(data.message || 'Actualizado correctamente.', 'success');
+                    } else {
+                        mostrarMensaje(data.message || 'Error al actualizar.', 'error');
                     }
+                })
+                .catch(error => {
+                    mostrarMensaje('Error de conexión.', 'error');
+                    console.error(error);
                 });
-            }
+            });
         });
+
+        // Botones "Agregar" alternativos (desplazan al formulario superior)
+        document.getElementById('btnAgregarTecnica')?.addEventListener('click', function() {
+            const form = document.querySelector('#tablaProcedimientos').closest('.card').querySelector('form');
+            if (form) form.querySelector('input[name="nombre"]').focus();
+        });
+        document.getElementById('btnAgregarInsumo')?.addEventListener('click', function() {
+            const form = document.querySelector('#tablaInsumos').closest('.card').querySelector('form');
+            if (form) form.querySelector('input[name="nombre"]').focus();
+        });
+
     })();
 </script>
 @endpush

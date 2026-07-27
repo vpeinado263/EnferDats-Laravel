@@ -24,17 +24,15 @@ class InsumoController extends Controller
     }
 
     public function update(Request $request, $id)
-    
     {
         $insumo = Insumo::findOrFail($id);
         $request->validate([
-        'nombre' => 'required|string|max:255',
-        'precio' => 'required|numeric|min:0',]);
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
         $insumo->update($request->all());
-        
         return redirect()->route('dashboard')->with('success', 'Insumo actualizado.');
     }
-
     
     public function destroy($id)
     {
