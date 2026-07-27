@@ -1,7 +1,10 @@
 <footer class="bg-dark text-light py-4">
     <div class="container text-center">
-        <a class="navbar-brand" href="#">
-            <img alt="Titulo" src="{{ asset('images/titulo.png') }}" />
+        <a class="navbar-brand" 
+           href="#solicitud"
+           data-bs-toggle="modal"
+           data-bs-target="#demoModal">
+           <img alt="Título" src="{{ asset('images/titulo.png') }}" />
         </a>
         <div class="mb-3">
             <a href="https://www.linkedin.com/in/victor-peinado1739/" class="text-light mx-2">

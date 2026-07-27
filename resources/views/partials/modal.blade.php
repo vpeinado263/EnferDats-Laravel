@@ -7,7 +7,10 @@
             </div>
             <div class="modal-body">
                 <p>Debes completar el formulario.</p>
-                <a href="#solicitud" class="btn btn-outline-success ms-3">Ir al formulario</a>
+                <a href="{{ route('contacto') }}"
+                   class="btn btn-outline-success ms-3">
+                    Ir al formulario
+                </a>
             </div>
         </div>
     </div>
