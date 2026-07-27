@@ -12,7 +12,7 @@
                     <h1 class="display-4 fw-bold mb-4">Bienvenidos</h1>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="{{ asset('ENFER-DATS-Logo.png') }}" alt="EnferData-Logo" class="img-fluid rounded">   
+                    <img src="{{ asset('images/ENFER-DATS-Logo.png') }}" alt="EnferData-Logo" class="img-fluid rounded">   
                 </div>
             </div>
         </div>
