@@ -1,7 +1,7 @@
 <footer class="bg-dark text-light py-4">
     <div class="container text-center">
         <a class="navbar-brand" href="#">
-            <img alt="Servicio" src="{{ asset('titulo.png') }}" />
+            <img alt="Titulo" src="{{ asset('images/titulo.png') }}" />
         </a>
         <div class="mb-3">
             <a href="https://www.linkedin.com/in/victor-peinado1739/" class="text-light mx-2">
