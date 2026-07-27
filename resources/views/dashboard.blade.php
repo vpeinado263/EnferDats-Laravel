@@ -179,8 +179,6 @@
 <script>
     (function() {
         'use strict';
-
-        // Función para mostrar mensaje temporal
         function mostrarMensaje(texto, tipo = 'success') {
             const el = document.getElementById('mensajeActualizacion');
             el.textContent = texto;
@@ -188,12 +186,11 @@
             setTimeout(() => { el.textContent = ''; }, 4000);
         }
 
-        // Manejar clic en botón actualizar (💾)
         document.querySelectorAll('.actualizar-fila').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const id = this.dataset.id;
-                const tabla = this.dataset.tabla; // 'procedimientos' o 'insumos'
+                const tabla = this.dataset.tabla; 
                 const row = this.closest('tr');
                 const nombre = row.querySelector('.nombre-input').value.trim();
                 const precio = row.querySelector('.precio-input').value.trim();
@@ -203,18 +200,12 @@
                     return;
                 }
 
-                // Determinar la ruta según la tabla
                 const url = `/${tabla}/${id}`;
                 const data = {
                     nombre: nombre,
-                    precio: tabla === 'insumos' ? parseFloat(precio) : parseFloat(precio), // en insumos se llama 'precio'
-                    // Nota: en procedimientos la columna es 'costo', pero en el controlador aceptamos 'costo' o 'precio'
-                    // Para simplificar, el controlador debe leer 'precio' para insumos y 'costo' para procedimientos.
-                    // Vamos a enviar un campo genérico 'valor' y en el controlador lo asignamos.
-                    // O mejor, usar el nombre correcto según la tabla.
+                    precio: tabla === 'insumos' ? parseFloat(precio) : parseFloat(precio), 
                 };
 
-                // Para insumos, el campo es 'precio'; para procedimientos, 'costo'
                 if (tabla === 'insumos') {
                     data.precio = parseFloat(precio);
                 } else {
@@ -244,7 +235,6 @@
             });
         });
 
-        // Botones "Agregar" alternativos (desplazan al formulario superior)
         document.getElementById('btnAgregarTecnica')?.addEventListener('click', function() {
             const form = document.querySelector('#tablaProcedimientos').closest('.card').querySelector('form');
             if (form) form.querySelector('input[name="nombre"]').focus();
