@@ -1,8 +1,4 @@
-# EnferDats-Laravel
-Proyecto realizado utilizando Laravel
 # ENFER-DATS
-
-Aplicación web desarrollada con Laravel para la gestión de actividades de enfermería.
 
 ## Tecnologías utilizadas
 
@@ -26,15 +22,6 @@ Aplicación web desarrollada con Laravel para la gestión de actividades de enfe
 - Ubuntu (WSL)
 - Git
 - Visual Studio Code
-
----
-
-## Clonar el proyecto
-
-```bash
-git clone https://github.com/TU-USUARIO/EnferDats-Laravel.git
-cd EnferDats-Laravel
-```
 
 ---
 
