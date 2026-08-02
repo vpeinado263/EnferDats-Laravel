@@ -7,7 +7,7 @@ Aplicación web desarrollada con Laravel para la gestión de actividades de enfe
 ## Tecnologías utilizadas
 
 - Laravel 10
-- PHP 8.3 (Docker)
+- PHP 8.3
 - MySQL 8
 - Nginx
 - Docker
